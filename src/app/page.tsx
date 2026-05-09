@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { SpendForm } from "@/components/audit/spend-form";
 
 export default function Home() {
   return (
@@ -43,7 +44,7 @@ export default function Home() {
         </section>
 
         {/* Preview Card */}
-        <section className="flex justify-center shadow-2xl p-12">
+        <section className="flex justify-center shadow-2xl p-12 mt-12">
           <Card className="w-full max-w-2xl rounded-2xl border border-slate-200 shadow-sm">
             <CardContent className="space-y-6 p-8">
               <p className="text-sm font-medium text-slate-500">
@@ -98,6 +99,7 @@ export default function Home() {
             </CardContent>
           </Card>
         </section>
+        <SpendForm />
 
       </div>
     </main>
