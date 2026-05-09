@@ -19,7 +19,12 @@ export function SpendForm() {
   const [monthlySpend, setMonthlySpend] = useState("");
   const [seats, setSeats] = useState("");
   const [useCase, setUseCase] = useState("");
-
+  const [auditResult, setAuditResult] = useState<null | {
+    recommendation: string;
+    estimatedSavings: number;
+    reason: string;
+    confidence: string;
+    }>(null);
   const handleAudit = () => {
     const audit = generateAudit({
         tool,
@@ -28,7 +33,7 @@ export function SpendForm() {
         useCase,
     });
 
-console.log(audit);
+    setAuditResult(audit);
   };
 
   return (
@@ -149,6 +154,42 @@ console.log(audit);
           >
             Generate Audit
           </Button>
+          {auditResult && (
+  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+    
+    <div className="space-y-2">
+      <p className="text-sm font-medium text-slate-500">
+        Audit Result
+      </p>
+
+      <h3 className="text-2xl font-semibold">
+        {auditResult.recommendation}
+      </h3>
+
+      <p className="text-slate-600">
+        {auditResult.reason}
+      </p>
+    </div>
+
+    <div className="mt-6 flex items-center justify-between">
+      
+      <div>
+        <p className="text-sm text-slate-500">
+          Estimated Savings
+        </p>
+
+        <p className="text-3xl font-bold">
+          ${auditResult.estimatedSavings}/mo
+        </p>
+      </div>
+
+      <div className="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium">
+        {auditResult.confidence} confidence
+      </div>
+
+    </div>
+  </div>
+)}
         </CardContent>
       </Card>
     </section>

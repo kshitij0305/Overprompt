@@ -8,32 +8,36 @@ interface AuditInput {
 export function generateAudit(input: AuditInput) {
   const { tool, monthlySpend, seats, useCase } = input;
 
-  if (tool === "chatgpt" && seats <= 2) {
+  if (
+    (tool === "chatgpt" || tool === "claude") &&
+    seats <= 2 &&
+    monthlySpend > 50
+  ) {
     return {
-      recommendation: "Switch to ChatGPT Plus",
+      recommendation: "Downgrade to individual plans",
       estimatedSavings: 20,
       reason:
-        "Team collaboration features appear underutilized for a small workflow.",
+        "Collaboration-focused pricing tiers may be unnecessary for small teams.",
       confidence: "high",
     };
   }
 
-  if (tool === "claude" && monthlySpend > 100) {
+  if (tool === "cursor" && useCase !== "coding") {
     return {
-      recommendation: "Consolidate Claude subscriptions",
-      estimatedSavings: 40,
+      recommendation: "Evaluate workflow-specific alternatives",
+      estimatedSavings: 15,
       reason:
-        "Current Claude usage suggests overlapping subscription tiers.",
+        "Cursor's pricing is most efficient for engineering-focused workflows.",
       confidence: "medium",
     };
   }
 
-  if (tool === "cursor" && useCase === "writing") {
+  if (monthlySpend / seats > 100) {
     return {
-      recommendation: "Consider ChatGPT Plus instead",
-      estimatedSavings: 15,
+      recommendation: "Review enterprise-tier utilization",
+      estimatedSavings: 40,
       reason:
-        "Cursor is optimized for development workflows rather than writing-heavy usage.",
+        "Current spend per seat appears high relative to typical usage patterns.",
       confidence: "medium",
     };
   }
@@ -42,7 +46,7 @@ export function generateAudit(input: AuditInput) {
     recommendation: "Current setup appears reasonably optimized",
     estimatedSavings: 0,
     reason:
-      "No significant savings opportunities detected based on the provided inputs.",
+      "No significant savings opportunities detected from the provided inputs.",
     confidence: "low",
   };
 }
