@@ -1,34 +1,85 @@
 "use client";
 
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { generateAudit } from "@/lib/audit-engine";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function SpendForm() {
+  const [tool, setTool] = useState("");
+  const [monthlySpend, setMonthlySpend] = useState("");
+  const [seats, setSeats] = useState("");
+  const [useCase, setUseCase] = useState("");
+
+  const handleAudit = () => {
+    const audit = generateAudit({
+        tool,
+        monthlySpend: Number(monthlySpend),
+        seats: Number(seats),
+        useCase,
+    });
+
+console.log(audit);
+  };
+
   return (
     <section className="flex justify-center py-20">
       <Card className="w-full max-w-2xl rounded-2xl border border-slate-200 shadow-sm">
         <CardContent className="space-y-6 p-8">
-          
           <div>
             <h2 className="text-2xl font-semibold">
               Run Your AI Spend Audit
             </h2>
 
             <p className="mt-2 text-sm text-slate-600">
-              Enter your current AI tooling setup to receive optimization recommendations.
+              Enter your current AI tooling setup to receive optimization
+              recommendations.
             </p>
           </div>
 
           {/* Form Fields */}
           <div className="space-y-4">
-
             <div>
               <label className="mb-2 block text-sm font-medium">
                 Tool
               </label>
 
-              <Input placeholder="e.g. ChatGPT Team" />
+              <Select onValueChange={setTool}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a tool" />
+                </SelectTrigger>
+
+                <SelectContent className="bg-black text-white">
+                  <SelectItem value="chatgpt">
+                    ChatGPT
+                  </SelectItem>
+
+                  <SelectItem value="claude">
+                    Claude
+                  </SelectItem>
+
+                  <SelectItem value="cursor">
+                    Cursor
+                  </SelectItem>
+
+                  <SelectItem value="copilot">
+                    GitHub Copilot
+                  </SelectItem>
+
+                  <SelectItem value="gemini">
+                    Gemini
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
@@ -36,7 +87,12 @@ export function SpendForm() {
                 Monthly Spend ($)
               </label>
 
-              <Input type="number" placeholder="200" />
+              <Input
+                type="number"
+                placeholder="200"
+                value={monthlySpend}
+                onChange={(e) => setMonthlySpend(e.target.value)}
+              />
             </div>
 
             <div>
@@ -44,7 +100,12 @@ export function SpendForm() {
                 Number of Seats
               </label>
 
-              <Input type="number" placeholder="5" />
+              <Input
+                type="number"
+                placeholder="5"
+                value={seats}
+                onChange={(e) => setSeats(e.target.value)}
+              />
             </div>
 
             <div>
@@ -52,15 +113,42 @@ export function SpendForm() {
                 Primary Use Case
               </label>
 
-              <Input placeholder="coding / research / writing" />
-            </div>
+              <Select onValueChange={setUseCase}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a use case" />
+                </SelectTrigger>
 
+                <SelectContent className="bg-black text-white">
+                  <SelectItem value="coding">
+                    Coding
+                  </SelectItem>
+
+                  <SelectItem value="writing">
+                    Writing
+                  </SelectItem>
+
+                  <SelectItem value="research">
+                    Research
+                  </SelectItem>
+
+                  <SelectItem value="data-analysis">
+                    Data Analysis
+                  </SelectItem>
+
+                  <SelectItem value="mixed">
+                    Mixed
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          <Button className="w-full bg-slate-900 text-white hover:bg-slate-800">
+          <Button
+            onClick={handleAudit}
+            className="w-full bg-slate-900 text-white hover:bg-slate-800"
+          >
             Generate Audit
           </Button>
-
         </CardContent>
       </Card>
     </section>
