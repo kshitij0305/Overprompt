@@ -6,15 +6,12 @@ The product focuses on SaaS optimization principles rather than subjective AI mo
 
 ---
 
-<<<<<<< HEAD
-=======
 # Live Demo
 
 https://your-vercel-url.vercel.app
 
 ---
 
->>>>>>> 73261a2 (docs: finalize product documentation and README)
 # Problem
 
 AI tool adoption is growing faster than AI spend visibility.
@@ -119,13 +116,8 @@ The system is intentionally vendor-neutral and designed around SaaS optimization
 
 # Current MVP Scope
 
-<<<<<<< HEAD
-The current version supports:
-- single-tool audits
-=======
 The current version is currently optimized for:
 - single-tool audit workflows
->>>>>>> 73261a2 (docs: finalize product documentation and README)
 - dynamic recommendation rendering
 - savings estimation
 - structured pricing research integration
@@ -139,15 +131,6 @@ Planned future improvements include:
 
 ---
 
-<<<<<<< HEAD
-# Local Development
-
-## Clone Repository
-
-```bash
-git clone <repository-url>
-cd overprompt
-=======
 # Screenshots
 
 ## Landing Page
@@ -156,7 +139,7 @@ cd overprompt
 
 ## Audit Result
 
-<img width="1200" alt="Audit Result" src="public/audit-result.png" />
+<img width="1200" alt="Audit Result" src="public/Audit-result.png" />
 
 ---
 
@@ -237,4 +220,3 @@ The project explores a simple idea:
 As AI tooling becomes more fragmented, users increasingly need visibility into whether their subscriptions are creating real value or unnecessary redundancy.
 
 Overprompt is an attempt to make that process understandable, lightweight, and actionable.
->>>>>>> 73261a2 (docs: finalize product documentation and README)
