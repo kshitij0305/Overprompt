@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Overprompt
 
-## Getting Started
+Overprompt is a lightweight AI spend audit tool designed to help teams identify redundant subscriptions, pricing inefficiencies, and workflow-tool mismatches across modern AI platforms.
 
-First, run the development server:
+The product focuses on SaaS optimization principles rather than subjective AI model comparisons.
+
+---
+
+# Problem
+
+AI tool adoption is growing faster than AI spend visibility.
+
+Many users and small teams now simultaneously pay for:
+- ChatGPT
+- Claude
+- Cursor
+- GitHub Copilot
+- Gemini
+- API subscriptions
+
+As workflows become increasingly AI-native, subscription overlap and underutilized premium plans can quietly create unnecessary monthly costs.
+
+Overprompt was built to explore whether AI tooling setups actually align with:
+- workflow requirements
+- team size
+- usage patterns
+- pricing efficiency
+
+---
+
+# Core Features
+
+- AI spend audit workflow
+- Workflow-aware recommendation engine
+- Dynamic savings estimation
+- SaaS-style audit interface
+- Pricing-backed recommendation logic
+- Vendor-neutral optimization approach
+- Explainable recommendation reasoning
+
+---
+
+# Product Philosophy
+
+The project intentionally avoids fake “AI-generated” recommendations.
+
+Instead, the audit engine uses deterministic heuristics based on:
+- workflow fit
+- pricing structure
+- team size
+- subscription overlap
+- utilization assumptions
+
+The goal is to create recommendations that feel:
+- believable
+- explainable
+- financially motivated
+- operationally useful
+
+rather than acting like another generic AI chatbot.
+
+---
+
+# Tech Stack
+
+## Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+
+## Deployment
+- Vercel
+
+---
+
+# Architecture Overview
+
+The current MVP follows a lightweight frontend-first architecture.
+
+Flow:
+1. User enters AI tooling and spend information
+2. Form state is handled locally with React state
+3. Deterministic audit logic evaluates the input
+4. Recommendations and estimated savings render dynamically
+
+The architecture intentionally prioritizes:
+- iteration speed
+- product clarity
+- explainable logic
+- MVP simplicity
+
+over production-scale infrastructure.
+
+---
+
+# Recommendation Logic
+
+The recommendation engine evaluates factors such as:
+- pricing efficiency
+- workflow alignment
+- spend-per-seat assumptions
+- collaboration plan justification
+- overlapping subscriptions
+
+The system is intentionally vendor-neutral and designed around SaaS optimization reasoning rather than AI model preference.
+
+---
+
+# Current MVP Scope
+
+The current version supports:
+- single-tool audits
+- dynamic recommendation rendering
+- savings estimation
+- structured pricing research integration
+
+Planned future improvements include:
+- multi-tool audit support
+- persistent audit history
+- API spend analysis
+- exportable reports
+- organization-level optimization insights
+
+---
+
+# Local Development
+
+## Clone Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone <repository-url>
+cd overprompt
