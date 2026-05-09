@@ -1,11 +1,5 @@
-interface AuditInput {
-  tool: string;
-  monthlySpend: number;
-  seats: number;
-  useCase: string;
-}
-
-export function generateAudit(input: AuditInput) {
+import { AuditInput, AuditResult } from "./types";
+export function generateAudit(input: AuditInput): AuditResult {
   const { tool, monthlySpend, seats, useCase } = input;
 
   if (

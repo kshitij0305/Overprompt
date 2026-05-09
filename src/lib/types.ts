@@ -15,11 +15,17 @@ export type UseCase =
   | "mixed";
 
 export interface AuditInput {
-  tool: ToolName;
-  plan: string;
+  tool: string;
   monthlySpend: number;
   seats: number;
-  useCase: UseCase;
+  useCase: string;
+}
+
+export interface AuditResult {
+  recommendation: string;
+  estimatedSavings: number;
+  reason: string;
+  confidence: string;
 }
 
 export interface AuditRecommendation {
