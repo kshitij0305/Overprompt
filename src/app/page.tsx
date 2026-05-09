@@ -3,19 +3,24 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto flex max-w-6xl flex-col px-6 py-8">
         
         {/* Navbar */}
         <nav className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Overprompt</h1>
+          <div className="space-y-1">
+            <h1 className="text-xl font-semibold">Overprompt</h1>
+            <h4 className="text-sm font-medium text-slate-600">
+              AI Spend Audit
+            </h4>
+          </div>
 
-          <Button>Run Audit</Button>
+          <Button className="bg-slate-900 text-white hover:bg-slate-800">Run Audit</Button>
         </nav>
 
         {/* Hero Section */}
         <section className="flex flex-col items-center justify-center py-24 text-center">
-          <div className="max-w-3xl space-y-6">
+          <div className="max-w-2xl space-y-6">
             <h1 className="text-5xl font-bold leading-tight tracking-tight">
               Your AI Stack Is Probably Overpriced
             </h1>
@@ -26,11 +31,11 @@ export default function Home() {
             </p>
 
             <div className="flex items-center justify-center gap-4">
-              <Button size="lg">
+              <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800">
                 Run Free Audit
               </Button>
 
-              <Button variant="outline" size="lg">
+              <Button variant="outline"  size="lg">
                 View Sample Report
               </Button>
             </div>
@@ -38,10 +43,11 @@ export default function Home() {
         </section>
 
         {/* Preview Card */}
-        <section className="flex justify-center">
+        <section className="flex justify-center shadow-2xl p-12">
           <Card className="w-full max-w-2xl rounded-2xl border border-slate-200 shadow-sm">
             <CardContent className="space-y-6 p-8">
-              
+              <p className="text-sm font-medium text-slate-500">
+                Audit Preview</p>
               <div>
                 <p className="text-sm font-medium text-slate-500">
                   Potential Savings
