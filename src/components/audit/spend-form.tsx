@@ -37,7 +37,7 @@ export function SpendForm() {
   };
 
   return (
-    <section className="flex justify-center py-20">
+    <section id="audit-form" className="flex justify-center py-20">
       <Card className="w-full max-w-2xl rounded-2xl border border-slate-200 shadow-sm">
         <CardContent className="space-y-6 p-8">
           <div>
