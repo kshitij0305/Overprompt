@@ -99,3 +99,49 @@ This was the first moment where the project genuinely started feeling like a Saa
 I’m still learning Next.js as I go, but I’m becoming much more comfortable reading errors, structuring components, and debugging issues incrementally instead of panicking and changing random files.
 
 Overall, today felt like the transition from “setting up a project” to actually building a product.
+
+---
+
+# Day 3 — Audit Engine Refinement & Product Realism
+
+Today focused less on feature quantity and more on improving the realism and credibility of the product experience.
+
+The biggest improvement was restructuring the audit engine from a single static recommendation system into a dynamic recommendation pipeline capable of returning multiple audit insights with confidence scoring and severity levels.
+
+Implemented:
+- structured recommendation types
+- dynamic audit rendering
+- confidence indicators
+- severity classification
+- savings estimation logic
+- workflow-fit heuristics
+- spend efficiency heuristics
+- positive recommendation handling
+
+A major focus today was making the audit results feel operationally believable rather than artificially “AI-generated.”
+
+The recommendation system was refined around deterministic SaaS optimization logic instead of subjective model comparisons.
+
+Examples of reasoning now include:
+- workflow mismatch detection
+- high spend-per-seat analysis
+- collaboration plan overprovisioning
+- efficient workflow alignment
+- realistic low-severity recommendations
+
+The frontend audit UI was also upgraded significantly:
+- dynamic recommendation cards
+- severity badges
+- confidence badges
+- improved hierarchy and readability
+- smoother UX interactions
+
+Additional improvements:
+- implemented smooth-scroll CTA behavior
+- refined component structure and indentation
+- tested multiple realistic audit scenarios
+- validated recommendation credibility across workflows
+
+A large amount of time was also spent debugging and stabilizing TypeScript state handling after migrating from static audit objects to typed recommendation arrays.
+
+Overall, Day 3 shifted the project from a prototype-like demo toward a more believable SaaS-style audit product.

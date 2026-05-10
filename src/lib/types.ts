@@ -41,5 +41,6 @@ export type Recommendation = {
   title: string;
   description: string;
   confidence: "low" | "medium" | "high";
+  severity: "low" | "medium" | "high";
   savings?: number;
 };

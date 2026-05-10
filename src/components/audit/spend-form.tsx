@@ -48,6 +48,7 @@ export function SpendForm() {
         
         <CardContent className="space-y-6 p-8">
           
+          {/* Heading */}
           <div>
             <h2 className="text-2xl font-semibold">
               Run Your AI Spend Audit
@@ -174,7 +175,7 @@ export function SpendForm() {
           {auditResult && (
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
 
-              {/* Savings */}
+              {/* Estimated Savings */}
               <div className="mb-6">
                 <p className="text-sm font-medium text-slate-500">
                   Estimated Savings
@@ -194,22 +195,43 @@ export function SpendForm() {
                     className="rounded-xl border border-slate-200 bg-white p-4"
                   >
 
-                    <div className="flex items-center justify-between">
-                      
+                    {/* Recommendation Header */}
+                    <div className="flex items-center justify-between gap-4">
+
                       <h3 className="font-semibold">
                         {rec.title}
                       </h3>
 
-                      <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium capitalize">
-                        {rec.confidence}
-                      </span>
+                      <div className="flex items-center gap-2">
+
+                        {/* Severity Badge */}
+                        <span
+                          className={`rounded-full border px-3 py-1 text-xs font-medium capitalize ${
+                            rec.severity === "high"
+                              ? "border-red-300 text-red-600"
+                              : rec.severity === "medium"
+                              ? "border-yellow-300 text-yellow-700"
+                              : "border-green-300 text-green-700"
+                          }`}
+                        >
+                          {rec.severity} severity
+                        </span>
+
+                        {/* Confidence Badge */}
+                        <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium capitalize">
+                          {rec.confidence}
+                        </span>
+
+                      </div>
 
                     </div>
 
+                    {/* Description */}
                     <p className="mt-2 text-sm text-slate-600">
                       {rec.description}
                     </p>
 
+                    {/* Savings */}
                     {rec.savings && (
                       <p className="mt-3 text-sm font-medium text-green-600">
                         Potential savings: ${rec.savings}/mo
@@ -225,6 +247,7 @@ export function SpendForm() {
           )}
 
         </CardContent>
+
       </Card>
     </section>
   );
