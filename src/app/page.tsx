@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SpendForm } from "@/components/audit/spend-form";
 import { Analytics } from "@vercel/analytics/next"
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -104,6 +104,7 @@ export default function Home() {
         </section>
         <SpendForm />
         <Analytics />
+        <SpeedInsights />
 
       </div>
     </main>
