@@ -37,3 +37,9 @@ export interface AuditRecommendation {
   reason: string;
   confidence: "high" | "medium" | "low";
 }
+export type Recommendation = {
+  title: string;
+  description: string;
+  confidence: "low" | "medium" | "high";
+  savings?: number;
+};

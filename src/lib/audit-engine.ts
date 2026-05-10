@@ -1,46 +1,122 @@
-import { AuditInput, AuditResult } from "./types";
-export function generateAudit(input: AuditInput): AuditResult {
-  const { tool, monthlySpend, seats, useCase } = input;
+import { Recommendation } from "./types";
+
+type AuditInput = {
+  tool: string;
+  monthlySpend: number;
+  seats: number;
+  useCase: string;
+};
+
+export function generateAudit(input: AuditInput) {
+  const recommendations: Recommendation[] = [];
+
+  const spendPerSeat =
+    input.seats > 0
+      ? input.monthlySpend / input.seats
+      : input.monthlySpend;
+
+  /*
+    WORKFLOW FIT
+  */
 
   if (
-    (tool === "chatgpt" || tool === "claude") &&
-    seats <= 2 &&
-    monthlySpend > 50
+    input.tool === "cursor" &&
+    input.useCase !== "coding"
   ) {
-    return {
-      recommendation: "Downgrade to individual plans",
-      estimatedSavings: 20,
-      reason:
-        "Collaboration-focused pricing tiers may be unnecessary for small teams.",
+    recommendations.push({
+      title: "Workflow mismatch detected",
+      description:
+        "Cursor is optimized for engineering-heavy workflows. Your selected use case may not fully utilize its capabilities.",
       confidence: "high",
-    };
+      savings: 20,
+    });
   }
 
-  if (tool === "cursor" && useCase !== "coding") {
-    return {
-      recommendation: "Evaluate workflow-specific alternatives",
-      estimatedSavings: 15,
-      reason:
-        "Cursor's pricing is most efficient for engineering-focused workflows.",
+  /*
+    SUBSCRIPTION EFFICIENCY
+  */
+
+  if (spendPerSeat > 40) {
+    recommendations.push({
+      title: "High spend per seat",
+      description:
+        "Current AI tooling cost per seat appears unusually high compared to typical usage patterns.",
       confidence: "medium",
-    };
+      savings: Math.round(input.monthlySpend * 0.2),
+    });
   }
 
-  if (monthlySpend / seats > 100) {
-    return {
-      recommendation: "Review enterprise-tier utilization",
-      estimatedSavings: 40,
-      reason:
-        "Current spend per seat appears high relative to typical usage patterns.",
+  /*
+    TEAM SIZE LOGIC
+  */
+
+  if (
+    input.tool === "chatgpt" &&
+    input.seats <= 2 &&
+    input.monthlySpend > 50
+  ) {
+    recommendations.push({
+      title: "Review collaboration plan usage",
+      description:
+        "Your current setup may be overprovisioned for a small team workflow.",
       confidence: "medium",
-    };
+      savings: 30,
+    });
   }
+
+  /*
+    CLAUDE RESEARCH WORKFLOW
+  */
+
+  if (
+    input.tool === "claude" &&
+    input.useCase === "research"
+  ) {
+    recommendations.push({
+      title: "Strong workflow alignment",
+      description:
+        "Claude appears appropriately aligned for long-context and research-heavy workflows.",
+      confidence: "high",
+    });
+  }
+
+  /*
+    CURSOR + LIGHTWEIGHT USAGE
+  */
+
+  if (
+    input.tool === "cursor" &&
+    input.monthlySpend <= 20 &&
+    input.useCase === "coding"
+  ) {
+    recommendations.push({
+      title: "Current setup appears efficient",
+      description:
+        "Your tooling configuration appears appropriately matched to your workflow needs.",
+      confidence: "high",
+    });
+  }
+
+  /*
+    FALLBACK
+  */
+
+  if (recommendations.length === 0) {
+    recommendations.push({
+      title: "No major inefficiencies detected",
+      description:
+        "Current AI tooling setup appears reasonably aligned with the provided workflow.",
+      confidence: "medium",
+    });
+  }
+
+  const estimatedSavings = recommendations.reduce(
+    (acc, rec) => acc + (rec.savings || 0),
+    0
+  );
 
   return {
-    recommendation: "Current setup appears reasonably optimized",
-    estimatedSavings: 0,
-    reason:
-      "No significant savings opportunities detected from the provided inputs.",
-    confidence: "low",
+    recommendations,
+    estimatedSavings,
   };
 }

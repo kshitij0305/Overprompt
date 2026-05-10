@@ -5,7 +5,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+
 import { generateAudit } from "@/lib/audit-engine";
+import { Recommendation } from "@/lib/types";
+
 import {
   Select,
   SelectContent,
@@ -19,27 +22,32 @@ export function SpendForm() {
   const [monthlySpend, setMonthlySpend] = useState("");
   const [seats, setSeats] = useState("");
   const [useCase, setUseCase] = useState("");
-  const [auditResult, setAuditResult] = useState<null | {
-    recommendation: string;
+
+  const [auditResult, setAuditResult] = useState<{
+    recommendations: Recommendation[];
     estimatedSavings: number;
-    reason: string;
-    confidence: string;
-    }>(null);
+  } | null>(null);
+
   const handleAudit = () => {
     const audit = generateAudit({
-        tool,
-        monthlySpend: Number(monthlySpend),
-        seats: Number(seats),
-        useCase,
+      tool,
+      monthlySpend: Number(monthlySpend),
+      seats: Number(seats),
+      useCase,
     });
 
     setAuditResult(audit);
   };
 
   return (
-    <section id="audit-form" className="flex justify-center py-20">
+    <section
+      id="audit-form"
+      className="flex justify-center py-20"
+    >
       <Card className="w-full max-w-2xl rounded-2xl border border-slate-200 shadow-sm">
+        
         <CardContent className="space-y-6 p-8">
+          
           <div>
             <h2 className="text-2xl font-semibold">
               Run Your AI Spend Audit
@@ -53,6 +61,8 @@ export function SpendForm() {
 
           {/* Form Fields */}
           <div className="space-y-4">
+
+            {/* Tool */}
             <div>
               <label className="mb-2 block text-sm font-medium">
                 Tool
@@ -87,6 +97,7 @@ export function SpendForm() {
               </Select>
             </div>
 
+            {/* Monthly Spend */}
             <div>
               <label className="mb-2 block text-sm font-medium">
                 Monthly Spend ($)
@@ -100,6 +111,7 @@ export function SpendForm() {
               />
             </div>
 
+            {/* Seats */}
             <div>
               <label className="mb-2 block text-sm font-medium">
                 Number of Seats
@@ -113,6 +125,7 @@ export function SpendForm() {
               />
             </div>
 
+            {/* Use Case */}
             <div>
               <label className="mb-2 block text-sm font-medium">
                 Primary Use Case
@@ -146,50 +159,71 @@ export function SpendForm() {
                 </SelectContent>
               </Select>
             </div>
+
           </div>
 
+          {/* Submit Button */}
           <Button
             onClick={handleAudit}
             className="w-full bg-slate-900 text-white hover:bg-slate-800"
           >
             Generate Audit
           </Button>
+
+          {/* Audit Results */}
           {auditResult && (
-  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-    
-    <div className="space-y-2">
-      <p className="text-sm font-medium text-slate-500">
-        Audit Result
-      </p>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
 
-      <h3 className="text-2xl font-semibold">
-        {auditResult.recommendation}
-      </h3>
+              {/* Savings */}
+              <div className="mb-6">
+                <p className="text-sm font-medium text-slate-500">
+                  Estimated Savings
+                </p>
 
-      <p className="text-slate-600">
-        {auditResult.reason}
-      </p>
-    </div>
+                <h2 className="mt-2 text-4xl font-bold">
+                  ${auditResult.estimatedSavings}/mo
+                </h2>
+              </div>
 
-    <div className="mt-6 flex items-center justify-between">
-      
-      <div>
-        <p className="text-sm text-slate-500">
-          Estimated Savings
-        </p>
+              {/* Recommendations */}
+              <div className="space-y-4">
 
-        <p className="text-3xl font-bold">
-          ${auditResult.estimatedSavings}/mo
-        </p>
-      </div>
+                {auditResult.recommendations.map((rec, index) => (
+                  <div
+                    key={index}
+                    className="rounded-xl border border-slate-200 bg-white p-4"
+                  >
 
-      <div className="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium">
-        {auditResult.confidence} confidence
-      </div>
+                    <div className="flex items-center justify-between">
+                      
+                      <h3 className="font-semibold">
+                        {rec.title}
+                      </h3>
 
-    </div>
-  </div>
-)}
+                      <span className="rounded-full border border-slate-300 px-3 py-1 text-xs font-medium capitalize">
+                        {rec.confidence}
+                      </span>
+
+                    </div>
+
+                    <p className="mt-2 text-sm text-slate-600">
+                      {rec.description}
+                    </p>
+
+                    {rec.savings && (
+                      <p className="mt-3 text-sm font-medium text-green-600">
+                        Potential savings: ${rec.savings}/mo
+                      </p>
+                    )}
+
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+          )}
+
         </CardContent>
       </Card>
     </section>
