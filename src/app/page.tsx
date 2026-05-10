@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SpendForm } from "@/components/audit/spend-form";
-
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (
@@ -103,6 +103,7 @@ export default function Home() {
           </Card>
         </section>
         <SpendForm />
+        <Analytics />
 
       </div>
     </main>
