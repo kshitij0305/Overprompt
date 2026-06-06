@@ -121,4 +121,4 @@ The goal is to make the product feel:
 - modern
 - operationally useful
 
-instead of sounding like a generic AI marketing page.
+instead of sounding like a sloppy generic AI marketing page.

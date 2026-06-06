@@ -142,7 +142,7 @@ export default function Home() {
                   </div>
 
                   <h2 className="text-5xl font-bold tracking-tight">
-                    $1,482/mo
+                    $1,482/month
                   </h2>
 
                   <p className="text-slate-600">
@@ -230,7 +230,7 @@ export default function Home() {
                   <p className="text-sm leading-6 text-slate-600">
                     Recommendations are generated using deterministic
                     optimization heuristics based on workflow alignment,
-                    pricing efficiency, and subscription overlap analysis.
+                    pricing efficiency, and subscriptions overlap analysis.
                   </p>
 
                 </div>
